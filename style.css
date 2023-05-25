@@ -1,0 +1,192 @@
+/* 
+    Murat Kirazkaya 
+*/
+body {
+    background-color: #1c1c1c;
+    color: white;
+    font-family: 'Creepster', cursive;
+    letter-spacing: 2.2px;
+}
+
+* {
+    user-select: none;
+}
+
+#app {
+    display: flex;
+}
+
+#app > div {
+    flex: 1;
+}
+
+.player-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.middle-area {
+    flex: 1;
+    text-align: center;
+}
+
+.attack {
+    background-image: url('img/attack.svg');
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.ultimate {
+    background-image: url('img/ultimate.svg');
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.turn-icon {
+    color: lightgreen;
+    border: 1px solid lightgreen;
+    background-color: transparent;
+    font-size: 20px;
+    font-family: sans-serif;
+    padding: 8px;
+    width: fit-content;
+    margin-top: 40px;
+    visibility: hidden;
+}
+
+.turn-icon.active {
+    visibility: visible;
+}
+
+.player-two-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.health-bar {
+    border-radius: 30px;
+    height: 20px;
+    background-color: darkgray;
+    width: 300px;
+    border: 1px solid gray;
+}
+
+.current-health {
+    background-color: red;
+    width: 100%;
+    height: 20px;
+    display: block;
+    border-radius: 30px;
+    transition: width 0.5s cubic-bezier(0.64, 0.08, 0.36, 1);
+}
+
+.mana-bar {
+    border-radius: 30px;
+    height: 20px;
+    background-color: darkgray;
+    width: 300px;
+    border: 1px solid gray;
+}
+
+.current-mana {
+    background-color: blue;
+    width: 100%;
+    height: 20px;
+    display: block;
+    border-radius: 30px;
+    transition: width 0.5s cubic-bezier(0.64, 0.08, 0.36, 1);
+}
+
+.shake {
+    animation: shake-keyf 0.5s;
+}
+
+@keyframes shake-keyf {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
+.log-screen {
+    min-height: 500px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid gray;
+    color: black;
+    font-size: 13px;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 8px;
+    overflow: scroll;
+    max-height: 500px;
+}
+
+.log-screen span.damage {
+    color: red;
+}
+
+.log-screen span.heal {
+    color: green;
+}
+
+.log-screen span.mana {
+    color: blue;
+}
+
+.log-screen span {
+    font-weight: bold;
+}
+
+.score {
+    font-size: 25px;
+}
+
+.reset-button {
+    margin-top: 16px;
+    width: fit-content;
+    cursor: pointer;
+    background-color: black;
+    padding: 8px;
+    border-radius: 4px;
+    color: cornflowerblue;
+    border: 1px solid cornflowerblue;
+    display: inline-block;
+}
+
+.skills {
+    margin-top: 40px;
+}
+
+.skills > span {
+    display: inline-block;
+    border: 1px solid;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 40px;
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    line-height: 70px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.skills > span.disabled {
+    color: red;
+    cursor: not-allowed;
+}
