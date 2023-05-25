@@ -37,6 +37,10 @@ function randomIntFromInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+function fetchLocalStorage() {
+    localStorage.setItem('history', JSON.stringify({ p1: PlayerOne, p2: PlayerTwo, turn: getTurn().prefix }))
+}
+
 function resetGame() {
     PlayerOne.healt = 100;
     PlayerOne.mana = 100;
@@ -51,6 +55,7 @@ function resetGame() {
     $('#log-screen').html('')
     $('#score').text(`${PlayerOne.won} - ${PlayerTwo.won}`)
     fetchManas()
+    fetchLocalStorage()
 }
 
 function log(text) {
@@ -69,10 +74,12 @@ function updateHealt(player, amout) {
 
 function increaseHealt(player, amout) {
     player.healt = Math.min(player.healt + amout, 100)
+    fetchLocalStorage()
 }
 
 function decreaseHealt(player, amout) {
     player.healt = Math.max(player.healt - amout, 0)
+    fetchLocalStorage()
 }
 
 function updateMana(player) {
@@ -87,10 +94,12 @@ function updateMana(player) {
 
 function increaseMana(player, amout) {
     player.mana = Math.min(player.mana + amout, 100)
+    fetchLocalStorage()
 }
 
 function decreaseMana(player, amout) {
     player.mana = Math.max(player.mana - amout, 0)
+    fetchLocalStorage()
 }
 
 function shakeMana(player) {
@@ -164,7 +173,9 @@ function fetchManas() {
     if (PlayerTwo.mana < skills.r.mana) $('#skill-R-1').css('background-color', 'darkred')
     else $('#skill-R-1').css('background-color', '')
 
+    fetchLocalStorage()
     setTimeout(() => {
+        fetchLocalStorage()
         if (PlayerOne.healt === 0) {
             alert('Player Two won this game.')
             PlayerTwo.won++;
@@ -178,6 +189,20 @@ function fetchManas() {
 }
 
 $(function Naz() {
+    if (localStorage.getItem('history') === null) {
+        localStorage.setItem('history', JSON.stringify({ p1: PlayerOne, p2: PlayerTwo, turn: getTurn().prefix }))
+    } else {
+        let history = JSON.parse(localStorage.getItem('history'))
+        PlayerOne = history.p1;
+        PlayerTwo = history.p2;
+        if (history.turn === 'p2') switchTurn()
+    }
+    updateHealt(PlayerOne)
+    updateHealt(PlayerTwo)
+    updateMana(PlayerOne)
+    updateMana(PlayerTwo)
+    $('#score').text(`${PlayerOne.won} - ${PlayerTwo.won}`)
+    
 
     $('#skill-Q-0').click(() => {
         if (getTurn().prefix !== PlayerOne.prefix) {
